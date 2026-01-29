@@ -1,0 +1,47 @@
+schema: '2.0'
+stages:
+  ingest_data:
+    cmd: python src/data_ingestion.py
+    deps:
+    - path: src/data_ingestion.py
+      hash: md5
+      md5: 36518257d213bccba68e44a9be8c8f39
+      size: 1846
+      isexec: true
+    outs:
+    - path: data/raw/african
+      hash: md5
+      md5: 8ae92feaf70538e3e9c81028b2c52e93.dir
+      size: 42845356
+      nfiles: 1
+    - path: data/raw/spanish
+      hash: md5
+      md5: 7a1ad02400050982a4dbd430502bb2ca.dir
+      size: 2088522169
+      nfiles: 1
+  extract_data:
+    cmd: python src/data_extract.py
+    deps:
+    - path: data/raw/african/Zenodo_dataset.tar.xz
+      hash: md5
+      md5: 8777c3430bfb0b9be5fa80927c2a2675
+      size: 42845356
+    - path: data/raw/spanish/FETAL_PLANES_ZENODO.zip
+      hash: md5
+      md5: 2a5fcc2cefb789bcc0f6c1f73e0ea43f
+      size: 2088522169
+    - path: src/data_extract.py
+      hash: md5
+      md5: 88d66ad5e8fd69a527f499bdfa79c03c
+      size: 1582
+    outs:
+    - path: data/extracted/african
+      hash: md5
+      md5: 064d320e5b2798aa3d79da7b2c762b43.dir
+      size: 55657022
+      nfiles: 451
+    - path: data/extracted/spanish
+      hash: md5
+      md5: de1d35dd89700430b5aae1c07697f2d9.dir
+      size: 2088026430
+      nfiles: 12403
